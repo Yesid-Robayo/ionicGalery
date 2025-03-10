@@ -21,7 +21,7 @@ Este proyecto es una aplicación completa de galería de fotos desarrollada con 
 ## Instalación
 1. Clona el repositorio:
    ```bash
-   git clone https://github.com/Yesid-Robayo/ionic
+   git clone https://github.com/Yesid-Robayo/ionicGalery
    cd ionic
    
 # Ejecuta el backend y la base de datos con Docker:
