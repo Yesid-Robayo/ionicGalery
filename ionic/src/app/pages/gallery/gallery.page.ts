@@ -180,15 +180,18 @@ export class GalleryPage implements OnInit {
         {
           text: "Guardar localmente",
           icon: "save",
-          handler: () => {
-            this.photoService.addNewToGallery(false)
+          handler: async () => {
+            await this.photoService.addNewToGallery(false)
+            await this.photoService.loadSaved()
           },
         },
         {
           text: "Guardar en la nube",
           icon: "cloud-upload",
-          handler: () => {
-            this.photoService.addNewToGallery(true)
+          handler: async () => {
+            await this.photoService.addNewToGallery(true)
+            await this.photoService.loadSaved()
+
           },
         },
         {

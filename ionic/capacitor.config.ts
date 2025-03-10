@@ -5,7 +5,6 @@ const config: CapacitorConfig = {
   appName: 'photoGallery',
   webDir: 'www',
   server:{
-    url: "http://10.0.2.2:3000",
     cleartext: true
   }
 };
