@@ -1,0 +1,54 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Inicio</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="ion-padding">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Bienvenido, {{ user?.name }}</ion-card-title>
+        <ion-card-subtitle>{{ user?.email }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Bienvenido a tu galería de fotos personal. Aquí puedes gestionar todas tus imágenes, tanto en tu dispositivo como en la nube.</p>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Resumen</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <ion-icon name="images" slot="start"></ion-icon>
+            <ion-label>Total de fotos</ion-label>
+            <ion-badge slot="end" color="primary">{{ photoCount }}</ion-badge>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="cloud" slot="start"></ion-icon>
+            <ion-label>Fotos en la nube</ion-label>
+            <ion-badge slot="end" color="secondary">{{ cloudPhotoCount }}</ion-badge>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <div class="action-buttons">
+      <ion-button expand="block" routerLink="/gallery">
+        <ion-icon name="images" slot="start"></ion-icon>
+        Ver Galería
+      </ion-button>
+      <ion-button expand="block" routerLink="/profile" color="secondary">
+        <ion-icon name="person" slot="start"></ion-icon>
+        Editar Perfil
+      </ion-button>
+    </div>
+  </div>
+</ion-content>
+

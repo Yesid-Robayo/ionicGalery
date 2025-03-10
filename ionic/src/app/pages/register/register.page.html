@@ -1,0 +1,86 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="ion-padding">
+    <div class="register-header">
+      <h1>Galería de Fotos</h1>
+      <p>Crea una cuenta para comenzar</p>
+    </div>
+
+    <form [formGroup]="credentials" (ngSubmit)="register()">
+      <div class="ion-padding">
+        <ion-item>
+          <ion-input 
+            label="Nombre" 
+            labelPlacement="floating" 
+            type="text" 
+            formControlName="name"
+          ></ion-input>
+        </ion-item>
+        <div class="validation-error" *ngIf="name?.invalid && (name?.dirty || name?.touched)">
+          <div *ngIf="name?.errors?.['required']">El nombre es requerido</div>
+        </div>
+
+        <ion-item>
+          <ion-input 
+            label="Email" 
+            labelPlacement="floating" 
+            type="email" 
+            formControlName="email"
+          ></ion-input>
+        </ion-item>
+        <div class="validation-error" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+          <div *ngIf="email?.errors?.['required']">El email es requerido</div>
+          <div *ngIf="email?.errors?.['email']">Por favor, ingresa un email válido</div>
+        </div>
+
+        <ion-item>
+          <ion-input 
+            label="Contraseña" 
+            labelPlacement="floating" 
+            type="password" 
+            formControlName="password"
+          ></ion-input>
+        </ion-item>
+        <div class="validation-error" *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+          <div *ngIf="password?.errors?.['required']">La contraseña es requerida</div>
+          <div *ngIf="password?.errors?.['minlength']">La contraseña debe tener al menos 6 caracteres</div>
+        </div>
+
+        <ion-item>
+          <ion-input 
+            label="Confirmar Contraseña" 
+            labelPlacement="floating" 
+            type="password" 
+            formControlName="confirmPassword"
+          ></ion-input>
+        </ion-item>
+        <div class="validation-error" *ngIf="confirmPassword?.invalid && (confirmPassword?.dirty || confirmPassword?.touched)">
+          <div *ngIf="confirmPassword?.errors?.['required']">La confirmación de contraseña es requerida</div>
+        </div>
+        <div class="validation-error" *ngIf="credentials.errors?.['mismatch'] && (confirmPassword?.dirty || confirmPassword?.touched)">
+          Las contraseñas no coinciden
+        </div>
+
+        <ion-button 
+          type="submit" 
+          expand="block" 
+          [disabled]="!credentials.valid"
+        >
+          Registrarse
+        </ion-button>
+
+        <div class="ion-text-center ion-padding-top">
+          <ion-button routerLink="/login" fill="clear" size="small">
+            ¿Ya tienes una cuenta? Inicia sesión
+          </ion-button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ion-content>
+

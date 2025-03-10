@@ -1,0 +1,71 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Galería</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col
+        size="6"
+        size-md="4"
+        size-lg="3"
+        *ngFor="let photo of photos; index as position"
+      >
+        <ion-card (click)="showActionSheet(photo, position)">
+          <div class="img-container">
+            <img
+              [src]="getSafeImageUrl(photo)"
+              alt="Foto"
+            />
+            <div class="img-overlay" (click)="openImageModal(photo, $event)">
+              <ion-icon name="expand"></ion-icon>
+            </div>
+          </div>
+          <ion-card-header>
+            <ion-card-subtitle>
+              <ion-badge color="{{photo.isCloud ? 'primary' : 'secondary'}}">
+                {{photo.isCloud ? 'Nube' : 'Local'}}
+              </ion-badge>
+            </ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addPhotoToGallery()">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!-- Modal para ver imagen ampliada -->
+  <ion-modal
+    [isOpen]="isModalOpen"
+    [backdropDismiss]="true"
+    (didDismiss)="closeModal()"
+  >
+    <ng-template>
+      <ion-content class="modal-content">
+        <div class="modal-image-container">
+          <img
+            *ngIf="selectedPhoto"
+            [src]="getSafeImageUrl(selectedPhoto)"
+            alt="Foto ampliada"
+            class="modal-image"
+          />
+        </div>
+        <ion-buttons class="modal-close-button">
+          <ion-button (click)="closeModal()">
+            <ion-icon name="close"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

@@ -1,0 +1,14 @@
+{
+  "appId": "io.ionic.photogallery",
+  "appName": "photo-gallery",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  }
+}
+

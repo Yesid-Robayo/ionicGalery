@@ -1,0 +1,57 @@
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:14
+    container_name: photo-gallery-db
+    environment:
+      POSTGRES_DB: photo_gallery
+      POSTGRES_USER: yesid
+      POSTGRES_PASSWORD: 1234
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  # Backend API
+  backend:
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+    container_name: photo-gallery-api
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - DB_HOST=photo-gallery-db
+      - DB_USER=yesid
+      - DB_PASSWORD=1234
+      - DB_NAME=photo_gallery
+      - JWT_SECRET=SecretYesidGalery
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    command: >
+      sh -c "until nc -z photo-gallery-db 5432; do
+      echo 'Esperando a PostgreSQL...'; sleep 2; done &&
+      echo 'PostgreSQL está activo. Iniciando el backend...' &&
+      npm run start"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+      - photo_uploads:/app/uploads
+    networks:
+      - app-network
+
+
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  photo_uploads:
+

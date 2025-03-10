@@ -1,0 +1,79 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="ion-padding">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Información Personal</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
+          <ion-item>
+            <ion-input label="Nombre" labelPlacement="floating" type="text" formControlName="name"></ion-input>
+          </ion-item>
+          <div class="validation-error" *ngIf="name?.invalid && (name?.dirty || name?.touched)">
+            <div *ngIf="name?.errors?.['required']">El nombre es requerido</div>
+          </div>
+
+          <ion-item>
+            <ion-input label="Email" labelPlacement="floating" type="email" formControlName="email"></ion-input>
+          </ion-item>
+          <div class="validation-error" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+            <div *ngIf="email?.errors?.['required']">El email es requerido</div>
+            <div *ngIf="email?.errors?.['email']">Por favor, ingresa un email válido</div>
+          </div>
+
+          <ion-button type="submit" expand="block" [disabled]="!profileForm.valid || profileForm.pristine">
+            Actualizar Perfil
+          </ion-button>
+        </form>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Cambiar Contraseña</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <form [formGroup]="passwordForm" (ngSubmit)="updatePassword()">
+          <ion-item>
+            <ion-input label="Contraseña Actual" labelPlacement="floating" type="password" formControlName="currentPassword"></ion-input>
+          </ion-item>
+          <div class="validation-error" *ngIf="currentPassword?.invalid && (currentPassword?.dirty || currentPassword?.touched)">
+            <div *ngIf="currentPassword?.errors?.['required']">La contraseña actual es requerida</div>
+          </div>
+
+          <ion-item>
+            <ion-input label="Nueva Contraseña" labelPlacement="floating" type="password" formControlName="newPassword"></ion-input>
+          </ion-item>
+          <div class="validation-error" *ngIf="newPassword?.invalid && (newPassword?.dirty || newPassword?.touched)">
+            <div *ngIf="newPassword?.errors?.['required']">La nueva contraseña es requerida</div>
+            <div *ngIf="newPassword?.errors?.['minlength']">La contraseña debe tener al menos 6 caracteres</div>
+          </div>
+
+          <ion-item>
+            <ion-input label="Confirmar Contraseña" labelPlacement="floating" type="password" formControlName="confirmPassword"></ion-input>
+          </ion-item>
+          <div class="validation-error" *ngIf="confirmPassword?.invalid && (confirmPassword?.dirty || confirmPassword?.touched)">
+            <div *ngIf="confirmPassword?.errors?.['required']">La confirmación de contraseña es requerida</div>
+          </div>
+          <div class="validation-error" *ngIf="passwordForm.errors?.['mismatch'] && (confirmPassword?.dirty || confirmPassword?.touched)">
+            Las contraseñas no coinciden
+          </div>
+
+          <ion-button type="submit" expand="block" [disabled]="!passwordForm.valid">
+            Cambiar Contraseña
+          </ion-button>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
+

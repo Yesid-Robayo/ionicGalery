@@ -1,0 +1,12 @@
+#back
+/back/node_modules
+
+#front
+/ionic/node_modules
+/ionic/www
+/ionic/platforms
+/ionic/plugins
+/ionic/android
+/ionic/ios
+/ionic/.angular
+/ionic/.vscode

@@ -1,0 +1,16 @@
+.validation-error {
+  color: var(--ion-color-danger);
+  font-size: 12px;
+  margin-left: 16px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+ion-card {
+  margin-bottom: 20px;
+}
+
+ion-button[type="submit"] {
+  margin-top: 20px;
+}
+
